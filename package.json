@@ -1,0 +1,24 @@
+{
+  "name": "uprojectbackend",
+  "version": "1.0.0",
+  "description": "Backend of a trello clone app",
+  "main": "index.js",
+  "type":"module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Dominguezd01/UprojectBackend.git"
+  },
+  "author": "Dominguezd01 | Miguel Dominguez Roman",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Dominguezd01/UprojectBackend/issues"
+  },
+  "homepage": "https://github.com/Dominguezd01/UprojectBackend#readme",
+  "dependencies": {
+    "express": "^4.18.2",
+    "nodemon": "^2.0.20"
+  }
+}
