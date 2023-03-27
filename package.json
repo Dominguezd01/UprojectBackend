@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Backend of a trello clone app",
   "main": "index.js",
-  "type":"module",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -18,7 +18,11 @@
   },
   "homepage": "https://github.com/Dominguezd01/UprojectBackend#readme",
   "dependencies": {
+    "@prisma/client": "^4.11.0",
     "express": "^4.18.2",
     "nodemon": "^2.0.20"
+  },
+  "devDependencies": {
+    "prisma": "^4.11.0"
   }
 }
