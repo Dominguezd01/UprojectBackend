@@ -80,7 +80,7 @@ model tasks {
 model users {
   id              Int            @id @default(autoincrement())
   name            String         @db.VarChar(100)
-  email           String         @db.VarChar(100)
+  email           String         @unique(map: "email") @db.VarChar(100)
   profile_picture String?        @default("profile_deffault.svg") @db.VarChar(100)
   password        String         @db.VarChar(255)
   boards          boards[]

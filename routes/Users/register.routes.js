@@ -8,8 +8,7 @@ routerRegister.post("/api/register", async(req, res) =>{
     const userData = await req.body
     const salt = bcrypt.genSaltSync(10);
     if(userData){
-
-        if(await prisma.users.create({
+        const userCreated = await prisma.users.create({
             data:{
                 name: userData.name,
                 email: userData.email,
@@ -17,14 +16,21 @@ routerRegister.post("/api/register", async(req, res) =>{
                                     ? userData.profile_picture 
                                     : null,
                 password: await bcrypt.hash(userData.password, salt)
-    
             }
-        })){
-            res.sendStatus(200)
+        })
+
+        if(userData){
+            res.json({
+                status: 200,
+                message: "Welcome aboard pretty person :D"
+            })
         }
          
     }else{
-        res.sendStatus(400)
+        res.json({
+            status: 400,
+            message: "Something is not working as intended, my bad :P"
+        })
     }
 
     
