@@ -4,7 +4,7 @@ const prisma = new PrismaClient()
 const deleteColumn = express.Router()
 
 
-deleteColumn.delete("/api/columns/delete", async (req, res) =>{
+deleteColumn.delete("/columns/delete", async (req, res) =>{
     const userData = await req.body
     console.log(userData)
     if(!userData || !userData.columnId){

@@ -6,7 +6,7 @@ import generateUUID from "../../modules/generateUUID.js"
 const prisma = new PrismaClient()
 const routerRegister = express.Router()
 
-routerRegister.post("/api/users/register", async(req, res) =>{
+routerRegister.post("/users/register", async(req, res) =>{
     const userData = await req.body
     const salt = await bcrypt.genSalt(10)
     if(userData){

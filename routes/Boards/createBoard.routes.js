@@ -4,7 +4,7 @@ import { PrismaClient } from '@prisma/client'
 const prisma = new PrismaClient()
 const routerCreateBoard = express.Router()
 
-routerCreateBoard.post("/api/boards/create", async(req, res)=>{
+routerCreateBoard.post("/boards/create", async(req, res)=>{
     const userData = await req.body
     if(!userData || !userData.board_name || !userData.userId){
         return res.status(400).json({status: 400,message: "Something go wrong"})

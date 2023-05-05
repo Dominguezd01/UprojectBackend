@@ -4,7 +4,7 @@ const prisma = new PrismaClient()
 const addTask = express.Router()
 
 
-addTask.post("/api/tasks/add", async(req , res) => {
+addTask.post("/tasks/add", async(req , res) => {
 
     const userData = await req.body
 

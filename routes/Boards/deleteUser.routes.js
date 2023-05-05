@@ -4,7 +4,7 @@ import { PrismaClient } from '@prisma/client'
 const prisma = new PrismaClient()
 const deleteUser = express.Router()
 
-deleteUser.delete("/api/boards/deleteUser", async (req, res) =>{
+deleteUser.delete("/boards/deleteUser", async (req, res) =>{
     const userData = await req.body
 
     if(!userData){

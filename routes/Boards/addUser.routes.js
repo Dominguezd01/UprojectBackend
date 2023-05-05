@@ -4,7 +4,7 @@ import { PrismaClient } from '@prisma/client'
 const prisma = new PrismaClient()
 const addUser = express.Router()
 
-addUser.post("/api/boards/addUser", async(req, res) =>{
+addUser.post("/boards/addUser", async(req, res) =>{
     const userData = await req.body
     console.log(userData)
     try {

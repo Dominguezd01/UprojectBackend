@@ -7,7 +7,7 @@ const prisma = new PrismaClient()
 const viewBoard = express.Router()
 
 
-viewBoard.get("/api/boards/view/:boardId/:userId", async (req, res) =>{
+viewBoard.get("/boards/view/:boardId/:userId", async (req, res) =>{
  
     let userData = req.params
     if(!userData || !userData.boardId || !userData.userId){

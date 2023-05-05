@@ -4,7 +4,7 @@ const prisma = new PrismaClient()
 const addColumn = express.Router()
 
 
-addColumn.post("/api/columns/add", async (req, res) => {
+addColumn.post("/columns/add", async (req, res) => {
     const userData = await req.body
 
     if(!userData || !userData.columnTitle || !userData.boardId){

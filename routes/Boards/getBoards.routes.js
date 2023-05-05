@@ -4,7 +4,7 @@ import bcrypt from "bcrypt";
 const prisma = new PrismaClient()
 const routerGetBoards = express.Router()
 
-routerGetBoards.get("/api/boards/:id", async(req, res)=>{
+routerGetBoards.get("/boards/:id", async(req, res)=>{
     const userData = req.params
     if(!userData){
         return res.status(400).json({

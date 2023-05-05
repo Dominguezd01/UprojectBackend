@@ -7,7 +7,7 @@ const editTask = express.Router()
  * content 
  * state
  */
-editTask.put("/api/tasks/edit", async(req, res)=>{
+editTask.put("/tasks/edit", async(req, res)=>{
     const userData = await req.body
     if(!userData || !userData.taskId || !userData.content || !userData.state){
 

@@ -4,7 +4,7 @@ import { PrismaClient, Prisma } from '@prisma/client'
 const prisma = new PrismaClient()
 const updateBoard = express.Router()
 
-updateBoard.put("/api/boards/update", async (req, res) =>{
+updateBoard.put("/boards/update", async (req, res) =>{
     const userData = await req.body
 
     if(!userData){

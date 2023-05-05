@@ -3,7 +3,7 @@ import { PrismaClient } from '@prisma/client'
 const prisma = new PrismaClient()
 const editColumnTitle = express.Router()
 
-editColumnTitle.put("/api/columns/editColumnTitle", async (req, res) =>{
+editColumnTitle.put("/columns/editColumnTitle", async (req, res) =>{
     const userData = await req.body
 
     if(!userData || !userData.columnId || !userData.columnTitle){

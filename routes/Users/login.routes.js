@@ -5,7 +5,7 @@ const prisma = new PrismaClient()
 const routerLogin = express.Router()
 
 
-routerLogin.post("/api/users/login", async (req, res) => {
+routerLogin.post("/users/login", async (req, res) => {
     const userData = await req.body
     if (!userData) {
         return res.sendStatus(400).json("Something broke")

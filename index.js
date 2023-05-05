@@ -41,26 +41,29 @@ app.use(cors())
 app.use(morgan("dev"))
 app.use(jsonParser)
  
+app.get("/", (req, res) =>{
+    res.send("IS UP BABY")
+})
 
 /**
  * Routes
  */
 
 //User Routes
-app.post("/api/users/login", routerLogin)
-app.post("/api/users/register", routerRegister)
+app.post("/users/login", routerLogin)
+app.post("/users/register", routerRegister)
 
 //Boards routes
-app.get("/api/boards/:id", routerGetBoards)
-app.get("/api/boards/view/:id/:userId", viewBoard)
-app.post("/api/boards/create", routerCreateBoard )
-app.delete("/api/boards/delete" , deleteBoard)
-app.put("/api/boards/update", updateBoard)
-app.post("/api/boards/addUser", addUser)
-app.delete("/api/boards/deleteUser" , deleteUser)
-app.put("/api/tasks/edit", editTask)
-app.delete("/api/tasks/delete", deleteTask)
-app.post("/api/tasks/add", addTask)
+app.get("/boards/:id", routerGetBoards)
+app.get("/boards/view/:id/:userId", viewBoard)
+app.post("/boards/create", routerCreateBoard )
+app.delete("/boards/delete" , deleteBoard)
+app.put("/boards/update", updateBoard)
+app.post("/boards/addUser", addUser)
+app.delete("/boards/deleteUser" , deleteUser)
+app.put("/tasks/edit", editTask)
+app.delete("/tasks/delete", deleteTask)
+app.post("/tasks/add", addTask)
 
 
 
@@ -70,9 +73,9 @@ app.post("/api/tasks/add", addTask)
  * columns Routes
  */
 
-app.post("/api/columns/add", addColumn)
-app.delete("/api/columns/delete", deleteColumn)
-app.put("/api/columns/editColumnTitle", editColumnTitle)
+app.post("/columns/add", addColumn)
+app.delete("/columns/delete", deleteColumn)
+app.put("/columns/editColumnTitle", editColumnTitle)
 /**
  * Listener
  */

@@ -7,7 +7,7 @@ const deleteBoard = express.Router()
 /**
  * commenbts
  */
-deleteBoard.delete("/api/boards/delete", async (req, res) =>{
+deleteBoard.delete("/boards/delete", async (req, res) =>{
     const userData = await req.body
     if(!userData){
         return res.status(400).json({message: "An error ocurred"})

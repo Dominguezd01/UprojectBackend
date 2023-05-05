@@ -4,7 +4,7 @@ import { Prisma } from "@prisma/client";
 const prisma = new PrismaClient()
 const deleteTask = express.Router()
 
-deleteTask.delete("/api/tasks/delete", async (req, res) =>{
+deleteTask.delete("/tasks/delete", async (req, res) =>{
     const userData = await req.body
 
     if(!userData || !userData.taskId){
