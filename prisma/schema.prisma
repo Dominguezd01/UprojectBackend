@@ -10,18 +10,18 @@ datasource db {
 model boards {
   id             Int              @id @default(autoincrement())
   name           String           @db.VarChar(75)
-  owner          Int
+  owner          String           @db.VarChar(36)
   users          users            @relation(fields: [owner], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_boards")
   boards_users   boards_users[]
   columns_boards columns_boards[]
 
-  @@index([owner], map: "fk_boards")
+  @@index([owner], map: "FK_board_owner")
 }
 
 model boards_users {
   id       Int    @id @default(autoincrement())
   board_id Int
-  user_id  Int
+  user_id  String @db.VarChar(36)
   boards   boards @relation(fields: [board_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_boards_users_board_id")
   users    users  @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_boards_users_user_id")
 
@@ -61,6 +61,7 @@ model columns_tasks {
 model states {
   id    Int     @id @default(autoincrement())
   state String  @db.VarChar(100)
+  color String? @default("#9ea3a0") @db.VarChar(50)
   tasks tasks[]
 }
 
@@ -68,22 +69,18 @@ model tasks {
   id            Int             @id @default(autoincrement())
   content       String          @db.VarChar(100)
   state_id      Int
-  user_id       Int?
   columns_tasks columns_tasks[]
-  users         users?          @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_tasks")
   states        states          @relation(fields: [state_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_tasks_state")
 
-  @@index([user_id], map: "fk_tasks")
   @@index([state_id], map: "fk_tasks_state")
 }
 
 model users {
-  id              Int            @id @default(autoincrement())
+  id              String         @id @db.VarChar(36)
   name            String         @db.VarChar(100)
   email           String         @unique(map: "email") @db.VarChar(100)
   profile_picture String?        @default("profile_deffault.svg") @db.VarChar(100)
   password        String         @db.VarChar(255)
   boards          boards[]
   boards_users    boards_users[]
-  tasks           tasks[]
 }

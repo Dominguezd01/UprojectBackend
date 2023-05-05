@@ -4,34 +4,45 @@ import bcrypt from "bcrypt";
 const prisma = new PrismaClient()
 const routerGetBoards = express.Router()
 
-routerGetBoards.get("/api/boards", async(req, res)=>{
-    const userData = req.query
-    console.log(userData)
-    let boards = await prisma.boards_users.findMany({
+routerGetBoards.get("/api/boards/:id", async(req, res)=>{
+    const userData = req.params
+    if(!userData){
+        return res.status(400).json({
+            status: 400,
+            message: "Something went wrong"
+        })
+    }
+
+    let userBoards = await prisma.boards_users.findMany({
         where:{
-            user_id: Number(userData.id)
+            user_id: userData.id
         },
-        select:{
-            boards:{
+        include:{
+            boards: {
                 select:{
                     id: true,
                     name: true,
                     owner: true
                 }
             }
-        }
+        }   
     })
+    console.log(userBoards)
+    
+    let boardsInfo = []
 
-    for (let board of boards){
-        let ownerName = await prisma.users.findUnique({
-            where: {
-                id: board.boards.owner
-            }
-        })
-        board.boards.owner = ownerName.name
+    for (let userBoard of userBoards){
+        let ownerName = await prisma.users.findUnique({where: {id: userBoard.boards.owner}})
+        let boardToPush = {}
+        boardToPush.owner = ownerName.name
+        boardToPush.name = userBoard.boards.name
+        boardToPush.id = userBoard.boards.id
+
+        boardsInfo.push(boardToPush)    
     }
 
-    res.send(boards)
+
+    return res.status(200).json({boards: boardsInfo})
 })
 
 export default routerGetBoards
