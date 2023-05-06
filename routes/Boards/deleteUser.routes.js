@@ -14,45 +14,45 @@ deleteUser.delete("/boards/deleteUser", async (req, res) =>{
     if(!userData.board_id || !userData.user_id || !userData.user_id_delete){
         return res.status(400).json({message: "Something went wrong with that :C"})
     }
-    const boardExists = await prisma.boards.findUnique({
-        where:{
-            id: Number(userData.board_id)
+    try{
+        const userExists = await prisma.boards_users.findFirst({
+            where: {
+                board_id: boardExists.id,
+                user_id : userData.user_id_delete
+            }
+        })
+        
+        if(userData.user_id != boardExists.owner){
+            return res.json({status: 401, message: "You are no authorize to do that talk to the owner"})
+            
         }
-    })
 
-    if(userData.user_id != boardExists.owner){
-        return res.json({status: 401, message: "You are no authorize to do that talk to the owner"})
-        
-    }
-    
-    const userExists = await prisma.boards_users.findFirst({
-        where: {
-            board_id: boardExists.id,
-            user_id : userData.user_id_delete
+        if(!userExists){
+            return res.json({status: 404, message: "User not found on this board"})
+            
         }
-    })
-    
-    if(!boardExists){
-        return res.json({status: 404, message: "Board not found"})
-        
-    }
-    if(!userExists){
-        return res.json({status: 404, message: "User not found on this board"})
-        
-    }
-    
-    const deleteProcess = await prisma.boards_users.delete({
-        where: {
-            id: userExists.id
+        const boardExists = await prisma.boards.findUnique({
+            where:{
+                id: Number(userData.board_id)
+            }
+        })
+        if(!boardExists){
+            return res.json({status: 404, message: "Board not found"})
+            
         }
-    })
 
-    if(!deleteProcess){
+        await prisma.boards_users.delete({
+            where: {
+                user_id: userExists.id,
+                board_id: boardExists.id
+            }
+        })
+    
+        return res.json({status: 200, message: "User deleted from the board succesfully"})
+    }catch(e){
         return res.json({status: 500, message: "Something went wrong on our servers, hold on a sec"})
-        
     }
 
-    res.json({status: 200, message: "User deleted from the board succesfully"})
     
 })
 
