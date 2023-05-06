@@ -17,7 +17,7 @@ deleteUser.delete("/boards/deleteUser", async (req, res) =>{
     try{
         const userExists = await prisma.boards_users.findFirst({
             where: {
-                board_id: boardExists.id,
+                board_id: parseInt(oardExists.id),
                 user_id : userData.user_id_delete
             }
         })
@@ -29,22 +29,12 @@ deleteUser.delete("/boards/deleteUser", async (req, res) =>{
 
         if(!userExists){
             return res.status(404).json({status: 404, message: "User not found on this board"})
-            
-        }
-        const boardExists = await prisma.boards.findUnique({
-            where:{
-                id: Number(userData.board_id)
-            }
-        })
-        if(!boardExists){
-            return res.status(400).json({status: 404, message: "Board not found"})
-            
         }
 
         await prisma.boards_users.delete({
             where: {
                 user_id: userExists.id,
-                board_id: boardExists.id
+                board_id: parseInt(boardExists.id)
             }
         })
     
