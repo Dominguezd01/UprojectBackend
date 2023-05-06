@@ -17,7 +17,7 @@ deleteUser.delete("/boards/deleteUser", async (req, res) =>{
     try{
         const userExists = await prisma.boards_users.findFirst({
             where: {
-                board_id: parseInt(oardExists.id),
+                board_id: parseInt(boardExists.id),
                 user_id : userData.user_id_delete
             }
         })
