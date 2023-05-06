@@ -1,5 +1,6 @@
 import express from "express";
 import { PrismaClient } from '@prisma/client'
+import contentDisposition from "content-disposition";
 
 const prisma = new PrismaClient()
 const routerCreateBoard = express.Router()
@@ -54,7 +55,7 @@ routerCreateBoard.post("/boards/create", async(req, res)=>{
 
         return res.status(200).json({status:200, board: board})
     }catch(error){
- 
+        console.log(error)
         return res.status(500).json({status: 500, message: "Internal server error"})
     }
    
