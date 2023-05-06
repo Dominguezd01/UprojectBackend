@@ -11,10 +11,20 @@ updateBoard.put("/boards/update", async (req, res) =>{
         return res.status(400).json({ message: "Something went wrong :C" })
     }
 
-    if(!userData.name || !userData.user_id || !userData.board_id){
+    if(!userData.name || !userData.userId || !userData.boardId){
         return res.status(400).json({ message: "Something went wrong :C" })    
     }
 
+    let userInBoard = await prisma.boards_users.findFirst({
+        where: {
+            user_id: userData.userId,
+            board_id: parseInt(userData.boardId)
+        }
+    })
+    
+    if(!userInBoard){
+        return res.status(401).json({status: 401, message: "You are not part of this board"})
+    }
     const boardFound = await prisma.boards.findUnique({where: {id: userData.board_id}})
 
     if(!boardFound){

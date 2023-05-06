@@ -34,7 +34,7 @@ routerRegister.post("/users/register", async(req, res) =>{
             })
     
             if(userCreated){    
-                return res.status(200).json({status:200,message: "Welcome aboard you pretty human :D"})
+                return res.status(200).json({status:200, message: "Welcome aboard you pretty human :D", sendData: {id: userCreated.id, name: userCreated.name}})
             }else{
                 return res.status(500).json({ status:500,message: "Something went really wrong but dotn worry its our fault :C"})
             }

@@ -9,11 +9,21 @@ const editTask = express.Router()
  */
 editTask.put("/tasks/edit", async(req, res)=>{
     const userData = await req.body
-    if(!userData || !userData.taskId || !userData.content || !userData.state){
+    if(!userData || !userData.taskId || !userData.content || !userData.state || !userData.boardId || !userData.userId){
 
         return res.status(400).json({message: "Something went wrong"})
     }
-
+    let userInBoard = await prisma.boards_users.findFirst({
+        where: {
+            user_id: userData.userId,
+            board_id: parseInt(userData.boardId)
+        }
+    })
+    
+    if(!userInBoard){
+        return res.status(401).json({status: 401, message: "You are not part of this board"})
+    }
+    
     let updateProcess = await prisma.tasks.update({
         where: {
             id: parseInt(userData.taskId)

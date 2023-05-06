@@ -7,10 +7,20 @@ const deleteTask = express.Router()
 deleteTask.delete("/tasks/delete", async (req, res) =>{
     const userData = await req.body
 
-    if(!userData || !userData.taskId){
+    if(!userData || !userData.taskId || !userData.userId ||userData.boardId){
         return res.status(400).json({status: 400, message : "Something went wrong"})
     }
     
+    let userInBoard = await prisma.boards_users.findFirst({
+        where: {
+            user_id: userData.userId,
+            board_id: parseInt(userData.boardId)
+        }
+    })
+    
+    if(!userInBoard){
+        return res.status(401).json({status: 401, message: "You are not part of this board"})
+    }
     try {
         await prisma.tasks.delete({
             where: {
