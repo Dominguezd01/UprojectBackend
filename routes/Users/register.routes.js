@@ -11,7 +11,7 @@ routerRegister.post("/users/register", async(req, res) =>{
     const salt = await bcrypt.genSalt(10)
     if(userData){
         if(!userData.name || !userData.email || !userData.password){
-            return res.status(400).json({message: "Something went wrong with that :C"})
+            return res.status(400).json({status:400, message: "Something went wrong with that :C"})
         }
 
         const emailAlreadyInUse = await prisma.users.findUnique({where: {email: userData.email}})
@@ -32,14 +32,14 @@ routerRegister.post("/users/register", async(req, res) =>{
         })
 
         if(userCreated){    
-            return res.json({message: "Welcome aboard you pretty human :D"})
+            return res.status(200).json({status:200,message: "Welcome aboard you pretty human :D"})
         }else{
-            return res.status(500).json({message: "Something went really wrong but dotn worrry its our fault :C"})
+            return res.status(500).json({ status:500,message: "Something went really wrong but dotn worry its our fault :C"})
         }
          
-    }else{
-        res.status(400).json({message: "Something is not working as intended, my bad :P"})
     }
+    return res.status(400).json({status:400,message: "Something is not working as intended, my bad :P"})
+    
 
     
 })
