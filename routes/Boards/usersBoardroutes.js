@@ -8,7 +8,7 @@ const usersBoard = express.Router()
 usersBoard.post("/boards/getUsersBoard", async (req, res) =>{
     const userData = req.body
 
-    if(!userData || !userData.id || userData.userId){
+    if(!userData || !userData.id || !userData.userId){
         return res.status(400).json({status: 400, message: "Something went wrong"})
     }
     try{
@@ -26,17 +26,24 @@ usersBoard.post("/boards/getUsersBoard", async (req, res) =>{
                 }
             }
         })
+        
 
         let sendData = []
-        boardsUsers.forEach(boardsUser => {
-            sendData.push(boardsUser.users)
-        });
-        return res.send(sendData)
+        boardsUsers.map( async (user) => {
+            if(user.users.id != userData.userId){
+               sendData.push(user.users)
+            }
+        })
+
+        return res.status(200).json({status:200, users:sendData})
     }catch(e){
+        console.log(e)
         return res.status(500).json({status:500, message: "Something went wrong"})
     }
 
     
 })
-
+const getUsersInfo = async(boardsUsers) =>{
+    return sendData
+}
 export default usersBoard
