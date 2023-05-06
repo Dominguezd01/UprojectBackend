@@ -23,12 +23,12 @@ deleteUser.delete("/boards/deleteUser", async (req, res) =>{
         })
         
         if(userData.user_id != boardExists.owner){
-            return res.json({status: 401, message: "You are no authorize to do that talk to the owner"})
+            return res.status(401).json({status: 401, message: "You are no authorize to do that talk to the owner"})
             
         }
 
         if(!userExists){
-            return res.json({status: 404, message: "User not found on this board"})
+            return res.status(404).json({status: 404, message: "User not found on this board"})
             
         }
         const boardExists = await prisma.boards.findUnique({
@@ -37,7 +37,7 @@ deleteUser.delete("/boards/deleteUser", async (req, res) =>{
             }
         })
         if(!boardExists){
-            return res.json({status: 404, message: "Board not found"})
+            return res.status(400).json({status: 404, message: "Board not found"})
             
         }
 
@@ -48,9 +48,9 @@ deleteUser.delete("/boards/deleteUser", async (req, res) =>{
             }
         })
     
-        return res.json({status: 200, message: "User deleted from the board succesfully"})
+        return res.status(200).json({status: 200, message: "User deleted from the board succesfully"})
     }catch(e){
-        return res.json({status: 500, message: "Something went wrong on our servers, hold on a sec"})
+        return res.status(500).json({status: 500, message: "Something went wrong on our servers, hold on a sec"})
     }
 
     
