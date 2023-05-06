@@ -31,7 +31,10 @@ usersBoard.post("/boards/getUsersBoard", async (req, res) =>{
         let sendData = []
         boardsUsers.map( async (user) => {
             if(user.users.id != userData.userId){
-               sendData.push(user.users)
+                let userId = user.users.id
+               sendData.push({
+                    [userId]: user.users.name
+               })
             }
         })
 
