@@ -25,6 +25,7 @@ updateBoard.put("/boards/update", async (req, res) =>{
     if(!userInBoard){
         return res.status(401).json({status: 401, message: "You are not part of this board"})
     }
+    
     const boardFound = await prisma.boards.findUnique({where: {id: userData.board_id}})
 
     if(!boardFound){
