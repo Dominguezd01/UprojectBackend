@@ -26,6 +26,7 @@ import addTask from "./routes/Tasks/addTask.route.js";
 import addColumn from "./routes/Columns/addColumn.routes.js";
 import deleteColumn from "./routes/Columns/deleteColumn.routes.js";
 import editColumnTitle from "./routes/Columns/editColumnTitle.routes.js";
+import usersBoard from "./routes/Boards/usersBoardroutes.js";
 /**
  * Consts
  */
@@ -64,7 +65,7 @@ app.delete("/boards/deleteUser" , deleteUser)
 app.put("/tasks/edit", editTask)
 app.delete("/tasks/delete", deleteTask)
 app.post("/tasks/add", addTask)
-
+app.post("/boards/getUsersBoard", usersBoard)
 
 
 
