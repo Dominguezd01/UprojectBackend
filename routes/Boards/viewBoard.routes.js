@@ -7,9 +7,10 @@ const prisma = new PrismaClient()
 const viewBoard = express.Router()
 
 
-viewBoard.get("/boards/view/:boardId/:userId", async (req, res) =>{
+viewBoard.post("/boards/view", async (req, res) =>{
  
-    let userData = req.params
+    let userData = await req.body
+    console.log(userData)
     if(!userData || !userData.boardId || !userData.userId){
         return res.status(400).json({status: 400, message: "Something went wrong"})
     }

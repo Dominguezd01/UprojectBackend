@@ -56,7 +56,7 @@ app.post("/users/register", routerRegister)
 
 //Boards routes
 app.get("/boards/:id", routerGetBoards)
-app.get("/boards/view/:id/:userId", viewBoard)
+app.post("/boards/view", viewBoard)
 app.post("/boards/create", routerCreateBoard )
 app.delete("/boards/delete" , deleteBoard)
 app.put("/boards/update", updateBoard)

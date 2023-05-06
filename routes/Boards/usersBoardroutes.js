@@ -6,12 +6,13 @@ const usersBoard = express.Router()
 
 
 usersBoard.post("/boards/getUsersBoard", async (req, res) =>{
-    const userData = req.body
+    const userData = await req.body
 
     if(!userData || !userData.id || !userData.userId){
         return res.status(400).json({status: 400, message: "Something went wrong"})
     }
     try{
+        console.log(userData)
         let boardsUsers = await prisma.boards_users.findMany({
             where:{           
                 board_id: parseInt(userData.id),

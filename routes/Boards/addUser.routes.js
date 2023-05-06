@@ -9,10 +9,10 @@ addUser.post("/boards/addUser", async(req, res) =>{
     console.log(userData)
     try {
         if(!userData){
-            return res.status(400).json({messagge: "Something went wrong :C"})
+            return res.status(400).json({status: 400, message: "Something went wrong :C"})
         }
         if(!userData.board_id || !userData.user_id ||!userData.add_user_email){
-            return res.status(400).json({ messagge: "Something went wrong" })
+            return res.status(400).json({status: 400, message: "Something went wrong" })
         }
 
         const boardToAdd = await prisma.boards.findUnique({where:{
@@ -20,14 +20,14 @@ addUser.post("/boards/addUser", async(req, res) =>{
         }})
 
         if(userData.user_id != boardToAdd.owner){
-            return res.status(401).json({ messagge: "You are not authorized to do this, talk to the owner" })
+            return res.status(401).json({status: 401, message: "You are not authorized to do this, talk to the owner" })
         }
         const userToAdd = await prisma.users.findFirst({where: {
             email: userData.add_user_email
         }})
     
         if(!userToAdd){
-            return res.status(404).json({ messagge: "User not found, check email" })
+            return res.status(404).json({ status: 404, message: "User not found, check email adress" })
         }
     
         const userAlreadyExists = await prisma.boards_users.findFirst({where:{
@@ -36,7 +36,7 @@ addUser.post("/boards/addUser", async(req, res) =>{
         }})
         console.log(userAlreadyExists)
         if(userAlreadyExists){
-            return res.status(200).json({ messagge: "User is already in the board" })
+            return res.status(302).json({ status: 302, message: "User is already in the board" })
         }
 
         const addUserToBoard = await prisma.boards_users.create({
@@ -45,10 +45,10 @@ addUser.post("/boards/addUser", async(req, res) =>{
                 user_id: userToAdd.id
             }
         })
-        return res.status(200).json({ messagge: "User added to the board" })
+        return res.status(200).json({ status:200, message: "User added to the board" })
     } catch (error) {
         console.log(error)
-        return res.status(500).json({ messagge: "Something went wrong :C" })
+        return res.status(500).json({ status: 500, message:"Something went wrong :C" })
     }
    
 })
