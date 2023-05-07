@@ -7,7 +7,7 @@ editColumnTitle.put("/columns/editColumnTitle", async (req, res) =>{
     const userData = await req.body
 
     if(!userData || !userData.columnId || !userData.columnTitle ||  !userData.boardId || !userData.userId){
-        return res.status(400).json({status: 400, message: "Something went wrong"})
+        return res.status(400).json({state: 400, message: "Something went wrong"})
     }
     let userInBoard = await prisma.boards_users.findFirst({
         where: {
@@ -17,7 +17,7 @@ editColumnTitle.put("/columns/editColumnTitle", async (req, res) =>{
     })
     
     if(!userInBoard){
-        return res.status(401).json({status: 401, message: "You are not part of this board"})
+        return res.status(401).json({state: 401, message: "You are not part of this board"})
     }
     
     try{
@@ -33,7 +33,7 @@ editColumnTitle.put("/columns/editColumnTitle", async (req, res) =>{
     }catch (e) {
         // The .code property can be accessed in a type-safe manner
         return res.status(500).json({
-            status: 500,
+            state: 500,
             message: "Something went wrong :C"
         })
     }

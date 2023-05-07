@@ -11,14 +11,14 @@ addUser.post("/boards/addUser", async(req, res) =>{
         if(!userData){
             return res.status(400).json({status: 400, message: "Something went wrong :C"})
         }
-        if(!userData.board_id || !userData.user_id ||!userData.add_user_email){
+        if(!userData.board_id || !userData.user_id ||!userData.add_user_email || Object.keys(userData.user_id).length == 0){
             return res.status(400).json({status: 400, message: "Something went wrong" })
         }
 
         const boardToAdd = await prisma.boards.findUnique({where:{
             id: parseInt(userData.board_id)
         }})
-
+        console.log(boardToAdd)
         if(userData.user_id != boardToAdd.owner){
             return res.status(401).json({status: 401, message: "You are not authorized to do this, talk to the owner" })
         }

@@ -11,7 +11,8 @@ viewBoard.post("/boards/view", async (req, res) =>{
  
     let userData = await req.body
     console.log(userData)
-    if(!userData || !userData.boardId || !userData.userId){
+
+    if(!userData || !userData.boardId || !userData.userId || !Object.keys(userData.userId)){
         return res.status(400).json({status: 400, message: "Something went wrong"})
     }
 

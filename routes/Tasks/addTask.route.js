@@ -8,7 +8,7 @@ addTask.post("/tasks/add", async(req , res) => {
 
     const userData = await req.body
 
-    if(!userData || !userData.columnId || !userData.content || !userData.boardId || !userData.userId  ){
+    if(!userData || !userData.columnId || !userData.content || !userData.boardId || !userData.userId  || Object.keys(userData.userId).length == 0){
         return res.status(400).json({status: 400, message: "Something went wrong"})
     }
 

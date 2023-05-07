@@ -30,7 +30,7 @@ deleteColumn.delete("/columns/delete", async (req, res) =>{
             }
         })
 
-        return res.status(200).json({status: 200, message: "Column deleted succesfully"})
+        return res.status(200).json({status: 200, message: "Column deleted succesfully 😔"})
     } catch (e) {
         // The .code property can be accessed in a type-safe manner
         return res.status(500).json({

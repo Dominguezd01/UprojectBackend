@@ -7,14 +7,14 @@ const addColumn = express.Router()
 addColumn.post("/columns/add", async (req, res) => {
     const userData = await req.body
 
-    if(!userData || !userData.columnTitle || !userData.boardId || !userData.userId){
+    if(!userData || !userData.columnTitle || !userData.boardId || !userData.userId || Object.keys(userData.userId).length == 0){
 
         return res.status(400).json({
             status: 400,
             message: "Something went wrong"
         })
     }
-
+    console.log(userData)
     let userInBoard = await prisma.boards_users.findFirst({
         where: {
             user_id: userData.userId,
