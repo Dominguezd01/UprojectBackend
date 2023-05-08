@@ -28,6 +28,7 @@ deleteTask.delete("/tasks/delete", async (req, res) =>{
                 id: userData.taskId
             }
         })
+        return res.status(200)
       } catch (e) {
         if (e instanceof Prisma.PrismaClientKnownRequestError) {
           // The .code property can be accessed in a type-safe manner
