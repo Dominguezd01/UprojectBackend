@@ -43,7 +43,7 @@ app.use(morgan("dev"))
 app.use(jsonParser)
  
 app.get("/", (req, res) =>{
-    res.send("IS UP BABY")
+    res.json({message: "IS UP BABY"})
 })
 
 /**
