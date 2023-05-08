@@ -34,7 +34,6 @@ viewBoard.post("/boards/view", async (req, res) =>{
     }
     
     let board = await getBoardInfo(boardFound)
-
     return res.status(200).json({status: 200, board})
 })
  
