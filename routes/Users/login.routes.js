@@ -8,7 +8,7 @@ const routerLogin = express.Router()
 routerLogin.post("/users/login", async (req, res) => {
     const userData = await req.body
     if (!userData) {
-        return res.sendStatus(400).json("Something broke")
+        return res.status(400).json("Something broke")
     }
 
     const userExists = await prisma.users.findUnique({ where: { email: userData.email } })
@@ -19,7 +19,7 @@ routerLogin.post("/users/login", async (req, res) => {
 
     bcrypt.compare(userData.password, userExists.password, (err, result) => {
         if (err) {
-            return res.sendStatus(500).json({ message: "Something goes wrong" })
+            return res.status(500).json({ message: "Something goes wrong" })
         }
         if (result) {
             const sendData = {
@@ -28,9 +28,9 @@ routerLogin.post("/users/login", async (req, res) => {
                 proffilePicture: userExists.profile_picture
             }
 
-           return res.json({status: 200, sendData, message: "Good to see you again :D" })
+           return res.status.json({status: 200, sendData, message: "Good to see you again :D" })
         } else {
-            return res.status(401).json({ message: "Wrong email or password" })
+            return res.status(401).json({status: 401, message: "Wrong email or password" })
         }
     })
 
