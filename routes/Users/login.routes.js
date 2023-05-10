@@ -28,7 +28,7 @@ routerLogin.post("/users/login", async (req, res) => {
                 proffilePicture: userExists.profile_picture
             }
 
-           return res.status.json({status: 200, sendData, message: "Good to see you again :D" })
+           return res.status(200).json({status: 200, sendData, message: "Good to see you again :D" })
         } else {
             return res.status(401).json({status: 401, message: "Wrong email or password" })
         }
