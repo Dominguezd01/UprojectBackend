@@ -44,7 +44,7 @@ const jsonParser = bodyParser.json()
  * Middlewares
  */
 
-app.use(cors())
+app.options('*', cors())
 app.use(morgan("dev"))
 app.use(jsonParser)
  
