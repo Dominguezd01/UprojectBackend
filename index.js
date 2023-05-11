@@ -11,8 +11,11 @@ import bodyParser from "body-parser";
 /**
  * Routes imports
  */
+//users routes 
 import routerLogin from "./routes/Users/login.routes.js"
 import routerRegister from "./routes/Users/register.routes.js";
+import getUserInfo from "./routes/Users/getUserInfo.routes.js";
+
 import routerGetBoards from "./routes/Boards/getBoards.routes.js";
 import routerCreateBoard from "./routes/Boards/createBoard.routes.js";
 import deleteBoard from "./routes/Boards/delete.routes.js";
@@ -20,13 +23,16 @@ import updateBoard from "./routes/Boards/update.routes.js";
 import addUser from "./routes/Boards/addUser.routes.js";
 import deleteUser from "./routes/Boards/deleteUser.routes.js";
 import viewBoard from "./routes/Boards/viewBoard.routes.js";
+import usersBoard from "./routes/Boards/usersBoardroutes.js";
+
 import editTask from "./routes/Tasks/editTask.routes.js";
 import deleteTask from "./routes/Tasks/deleteTask.routes.js";
 import addTask from "./routes/Tasks/addTask.route.js";
+
 import addColumn from "./routes/Columns/addColumn.routes.js";
 import deleteColumn from "./routes/Columns/deleteColumn.routes.js";
 import editColumnTitle from "./routes/Columns/editColumnTitle.routes.js";
-import usersBoard from "./routes/Boards/usersBoardroutes.js";
+
 /**
  * Consts
  */
@@ -53,7 +59,7 @@ app.get("/", (req, res) =>{
 //User Routes
 app.post("/users/login", routerLogin)
 app.post("/users/register", routerRegister)
-
+app.post("/users/getUserInfo", getUserInfo)
 //Boards routes
 app.get("/boards/:id", routerGetBoards)
 app.post("/boards/view", viewBoard)
