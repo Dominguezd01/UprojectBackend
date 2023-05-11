@@ -26,7 +26,7 @@ getUserInfo.post("/users/getUserInfo", async (req, res) =>{
             proffilePicture: userExists.profile_picture
         }
     
-       return res.status(200).json({status: 200, sendData, message: "Good to see you again :D" })
+       return res.status(200).json({status: 200, sendData})
     
     }catch(e){
         return res.status(500).json({status: 500, message: "Something went wrong in our servers" })
