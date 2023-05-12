@@ -13,7 +13,7 @@ getUserInfo.post("/users/getUserInfo", async (req, res) =>{
             return res.status(400).json({status: 400, message: "Something went wrong"})
         }
     
-        const userExists = await prisma.users.findUnique({ where: { email: userData.email } })
+        const userExists = await prisma.users.findUnique({ where: { id: userData.userId } })
         
         if (!userExists) {
             return res.status(400).json({ status: 400, message: "Wrong email or password" })
@@ -29,6 +29,7 @@ getUserInfo.post("/users/getUserInfo", async (req, res) =>{
        return res.status(200).json({status: 200, sendData})
     
     }catch(e){
+        console.log(e)
         return res.status(500).json({status: 500, message: "Something went wrong in our servers" })
     }
 
