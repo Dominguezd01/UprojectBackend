@@ -8,6 +8,7 @@ editUserInfo.post("/users/edit", async (req, res) => {
     try {
         const userData = await req.body
         const salt = await bcrypt.genSalt(10)
+
         if (!userData || !userData.userId || !userData.oldPass || !userData.userName) {
             return res.status(400).json({ status: 400, message: "We did something bad it doesn't feel good" })
         }
@@ -22,7 +23,7 @@ editUserInfo.post("/users/edit", async (req, res) => {
 
         bcrypt.compare(userData.oldPass, userToEdit.password, async (err, result) => {
             if (err) {
-                return res.status(500).json({ message: "Something goes wrong" })
+                return res.status(500).json({ message: "Something went wrong" })
             }
             if (result) {
                 let passToSave
@@ -36,7 +37,6 @@ editUserInfo.post("/users/edit", async (req, res) => {
                         name: userData.userName,
                         email: userData.email,
                         password: await bcrypt.hash(passToSave, salt),
-
                     }
                 })  
                 let sendData = {name: update.name}
