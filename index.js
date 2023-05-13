@@ -32,6 +32,7 @@ import addTask from "./routes/Tasks/addTask.route.js";
 import addColumn from "./routes/Columns/addColumn.routes.js";
 import deleteColumn from "./routes/Columns/deleteColumn.routes.js";
 import editColumnTitle from "./routes/Columns/editColumnTitle.routes.js";
+import editUserInfo from "./routes/Users/editUserInfo.routes.js";
 
 /**
  * Consts
@@ -60,6 +61,7 @@ app.get("/", (req, res) =>{
 app.post("/users/login", routerLogin)
 app.post("/users/register", routerRegister)
 app.post("/users/getUserInfo", getUserInfo)
+app.post("/users/edit", editUserInfo)
 //Boards routes
 app.get("/boards/:id", routerGetBoards)
 app.post("/boards/view", viewBoard)
