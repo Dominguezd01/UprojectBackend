@@ -76,12 +76,9 @@ app.post("/tasks/add", addTask)
 app.post("/boards/getUsersBoard", usersBoard)
 
 
-
-
 /**
  * columns Routes
  */
-
 app.post("/columns/add", addColumn)
 app.delete("/columns/delete", deleteColumn)
 app.put("/columns/editColumnTitle", editColumnTitle)
